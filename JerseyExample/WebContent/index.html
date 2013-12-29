@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Atanas Atanasov homework</title>
+	<link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="./css/main.css" />
+	<link href="./css/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div id="container" class="container">
+			<div id="container_configuration" class="row" data-provide="ajax" data-template="messages" data-url="/hello/test" >
+			</div>
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title" data-i18n="title_newMessage"></h3>
+					</div>
+					<div class="panel-body">
+						<button id="button_showCreateMessage" class="btn btn-primary" data-i18n="button_showCreateMessage" data-provide="ajax-dialog" data-template="dialog-message" data-target="#dialog_message"
+							data-value='{"text": "some text"}'></button>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+<!-- Jquery plugins-->
+		<script src="./js/libs/jquery-1.10.2/jquery-1.10.2.min.js"></script>
+		<script src="./js/libs/jqueryui-1.10.0/jquery-ui.min.js"></script>
+		<script src="./bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="./js/libs/mustache.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/libs/jquery-mustache/jquery.mustache.js" type="text/javascript" charset="utf-8"></script>
+
+	<!-- Bootbox js for alert dialog in the style of bootstrap -->
+		<script src="./js/libs/bootbox.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<!-- Jquery plugin for validating form data -->
+		<script src="./js/libs/jquery.validate-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+
+	<!-- i18n plugin for localization -->
+		<script src="./js/libs/i18next-1.6.3.js" type="text/javascript" charset="utf-8"></script>
+
+		<script src="./js/ajaxdata.js"></script>
+		<script src="./js/index.js"></script>
+		
+		
+		
+<script type="text/x-mustache-template" id="template-dialog-message">
+	<div id="dialog_message" class="modal fade" role="dialog" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel" data-i18n="dialog-message-title"></h4>
+				</div>
+				<div class="modal-body">
+					<form class="form">
+						<fieldset>
+							<div class="input-group control-group form-group">
+								<label class="input-group-addon control-label" data-i18n="message-text-label" for="text"></label>
+								<input type="text" class="form-control" data-i18n="[placeholder]message-text-label;" id="text" name="text" autofocus="autofocus" value="{{text}}"/>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" data-i18n="dialog-button-cancel"></button>
+					{{#id}}<button type="button" class="btn btn-primary" data-i18n="dialog-button-update" id="dialog-message-update" data-id="{{id}}"></button>{{/id}}
+					{{^id}}<button type="button" class="btn btn-primary" data-i18n="dialog-button-create" id="dialog-message-create"></button>{{/id}}
+				</div>
+			</div>
+		</div>
+
+	</div>
+</script>
+
+
+
+<script type="text/x-mustache-template" id="template-messages">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title clickable" data-toggle="collapse" data-target="#panel-body-{{id}}">
+				{{text}}
+
+				<button type="button" class="btn btn-xs btn-default close" data-id="{{id}}" id="button_showRemoveMessage"><span class="glyphicon glyphicon-remove"></span></button>
+				<button type="button" class="btn btn-xs btn-default close" data-id="{{id}}">
+					<span class="glyphicon glyphicon-edit" data-provide="ajax-dialog" data-template="dialog-message" data-target="#dialog_message" data-url="api/hello/{{id}}"></span>
+				</button>
+				
+			</h3>
+		</div>
+	</div>
+</script>	
+</body>
+</html>
